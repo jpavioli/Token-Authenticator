@@ -1,0 +1,22 @@
+{
+  "name": "Token-Authenticator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "routes/server.js",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.9",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "sequelize": "^6.33.0",
+    "sqlite3": "^5.1.6",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "server": "node routes/server.js"
+  },
+  "author": "Justin Avioli",
+  "license": "ISC"
+}
