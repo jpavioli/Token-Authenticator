@@ -96,7 +96,7 @@ Sample Response:
 }
 ```
 
-### PATCH user/
+### PUT user/
 - Validate email and password are included in the request
 - Validate email exists
 - Authenticate email and salted/hashed password
@@ -104,7 +104,7 @@ Sample Response:
 
 Sample Request:
 ```
-curl --location --request PATCH 'http://localhost:6969/users/' \
+curl --location --request PUT 'http://localhost:6969/users/' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <TOKEN>' \
 --data '{
