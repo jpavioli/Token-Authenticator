@@ -17,7 +17,7 @@ class AuthController < ApplicationController
     private 
 
     def login_params 
-        params.permit(:email, :password)
+        params.require(:auth).permit(:email, :password)
     end
 
     def handle_record_not_found(e)
