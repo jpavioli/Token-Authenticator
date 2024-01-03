@@ -1,12 +1,13 @@
-# Node Token Authenticator
+# Ruby / Rails Token Authenticator
 
-This is a web service built using `node`, `express`, and `sqlite3` to signup, authenticate users, and issue JWT tokens for request Authorization. In order to use this repository, please ensure you have `node` installed on your local machine.
+This is a web service built using `ruby`, `rails`, and `sqlite3` to signup, authenticate users, and issue JWT tokens for request Authorization. In order to use this repository, please ensure you have `ruby` and `rails` installed on your local machine.
 
 ## Using this Repository 
-1. Install `node` packages $ npm i
-2. Update jwtSecret to a custom value for unique encoding of your personal instance ( node > config > default.json )
-3. The server will default to port 6969, this can be updated in routes > server.js (Line 14)
-4. Start the node server $ npm run server
+1. Install `ruby` gems $ bundle install
+2. Update jwtSecret to a custom value for unique encoding of your personal instance ( ruby-rails > config > application.yml )
+3. Perform a database migration to create required tables $ bin/rails db:migrate
+3. The server will default to port 3000
+4. Start the node server $ bin/rails server
 
 ## Routes and Sample Requests 
 
@@ -20,13 +21,13 @@ This is a web service built using `node`, `express`, and `sqlite3` to signup, au
 
 Sample Request:
 ```
-curl --location 'http://localhost:${port}/users/signup' \
+curl --location 'http://localhost:3000/users/signup' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "email": "john.doe@gmail.com",
     "password": "shhh",
-    "firstName": "John",
-    "lastName": "Doe",
+    "first_name": "John",
+    "last_name": "Doe",
     "birthday": "01/06/1988",
     "city": "New York",
     "state": "NY",
@@ -37,8 +38,17 @@ curl --location 'http://localhost:${port}/users/signup' \
 Sample Response:
 ```
 {
-    "token": "<TOKEN>",
-    "success": true
+    "user": {
+        "id": "<UUID>",
+        "email": "john.doe@gmail.com",
+        "first_name": "John",
+        "last_name": "Doe",
+        "birthday": "01/06/1988",
+        "city": "New York",
+        "state": "NY",
+        "zip": "10029"
+    },
+    "token": "<TOKEN>"
 }
 ```
 
@@ -50,7 +60,7 @@ Sample Response:
 
 Sample Request:
 ```
-curl --location --request GET 'http://localhost:6969/users/signin' \
+curl --location --request GET 'http://localhost:3000/users/signin' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "email": "john.doe@gmail.com",
@@ -61,8 +71,7 @@ curl --location --request GET 'http://localhost:6969/users/signin' \
 Sample Response:
 ```
 {
-    "token": "<TOKEN>",
-    "success": true
+    "token": "<TOKEN>"
 }
 ```
 
@@ -73,7 +82,7 @@ Sample Response:
 
 Sample Request:
 ```
-curl --location --request PATCH 'http://localhost:6969/users/' \
+curl --location --request PATCH 'http://localhost:3000/user/' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <TOKEN>' \
 ```
@@ -82,17 +91,14 @@ Sample Response:
 ```
 {
     "user": {
-        "customerId": "70ed9854-d215-4bd4-96d9-368b18a486c3",
+        "customerId": "<UUID>",
         "firstName": "John",
         "lastName": "Doe",
         "birthday": "01/06/1988",
         "city": "New York",
         "state": "NY",
-        "zip": 10029,
-        "createdAt": "2023-11-01 00:03:30.960 +00:00",
-        "updatedAt": "2023-11-01 00:03:30.960 +00:00"
-    },
-    "success": true
+        "zip": 10029
+    }
 }
 ```
 
@@ -104,7 +110,7 @@ Sample Response:
 
 Sample Request:
 ```
-curl --location --request PUT 'http://localhost:6969/users/' \
+curl --location --request PUT 'http://localhost:3000/users/' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <TOKEN>' \
 --data '{
@@ -116,16 +122,13 @@ Sample Response:
 ```
 {
     "user": {
-        "customerId": "70ed9854-d215-4bd4-96d9-368b18a486c3",
+        "customerId": "<UUID>",
         "firstName": "Not John",
         "lastName": "Doe",
         "birthday": "01/06/1988",
         "city": "New York",
         "state": "NY",
-        "zip": 10029,
-        "createdAt": "2023-11-01 00:03:30.960 +00:00",
-        "updatedAt": "2023-11-01 00:03:30.960 +00:00"
-    },
-    "success": true
+        "zip": 10029
+    }
 }
 ```

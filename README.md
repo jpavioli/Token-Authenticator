@@ -2,7 +2,7 @@
 This is a sandbox repository for various apps to authenticate users and provide JWT tokens and local storage persistence in various languages. 
 
 ## How to use this repository
-Within the main repository, there are functioning web servers in various languages/frameworks built to accomplish the same tasks. Each is built to accomplish the following tasks:
+Within the main repository, there are functioning web servers in various languages/frameworks built to accomplish the same tasks. Each is built to accomplish the following:
 1) Accept user data via a POST request and create a new Customer Entry. This includes:
    a. A customer email and password combination for authentication
    b. Assignment of an arbitrary Customer ID
@@ -16,3 +16,4 @@ Specifics for each framework are detailed in the appropriate README within the d
 
 ## Completed Authentication Services
 - Node 
+- Rails (Ruby)
